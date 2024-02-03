@@ -1,0 +1,18 @@
+package org.example.onlineschool_platform.Student.repository;
+
+import org.example.onlineschool_platform.Student.model.Student;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+public interface StudentRepo extends JpaRepository<Student, Long> {
+
+    @Query("select s from Student s where s.fullName= ?1")
+    Optional<Student> findStudentByFulName(String fullName);
+
+    @Query("select s from Student s where s.fullName= ?1 and s.password= ?2")
+    Optional<Student>findStudentByEmailAndPass(String fullName, String password);
+}
